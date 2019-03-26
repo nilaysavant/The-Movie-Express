@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const imdb = require('imdb-api')
@@ -29,6 +30,10 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     res.send(req.body.key)
+})
+
+app.get('/search', (req, res) => {
+
 })
 
 app.listen(PORT, () => {
