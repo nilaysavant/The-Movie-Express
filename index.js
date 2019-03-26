@@ -27,6 +27,8 @@ app.use(bodyParser.json())
 app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'main' }));
 app.set('view engine', 'hbs');
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
     res.send('hello!')
 })
@@ -39,19 +41,20 @@ app.get('/home', (req, res) => {
     res.render('home', { pageTitle: 'Some page title', content: 'some stuff' })
 })
 
-app.get('/search', (req, res) => {
+app.post('/search', (req, res) => {
+    let searchString = req.body.searchString
     imdb.search({
-        name: 'Toxic Avenger'
+        name: searchString
     },
         {
             apiKey: OMDB_API_KEY
         })
         .then((searchResults) => {
-            console.log('RES:', searchResults.results[0].name)
-            res.send('search success!')
+            // console.log('RES:', searchResults.results[0])
+            res.send(searchResults.results[0])
         })
         .catch(err => {
-            console.error(err)
+            // console.error(err)
             res.send('error !')
         });
 })
