@@ -24,7 +24,7 @@ app.use(morgan('dev')) // a logger for express
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'main'}));
+app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'main' }));
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
@@ -36,11 +36,24 @@ app.post('/', (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    res.render('home', { pageTitle: 'Some page title', content: 'some stuff'})
+    res.render('home', { pageTitle: 'Some page title', content: 'some stuff' })
 })
 
 app.get('/search', (req, res) => {
-    res.send('search')
+    imdb.search({
+        name: 'Toxic Avenger'
+    },
+        {
+            apiKey: OMDB_API_KEY
+        })
+        .then((searchResults) => {
+            console.log('RES:', searchResults.results[0].name)
+            res.send('search success!')
+        })
+        .catch(err => {
+            console.error(err)
+            res.send('error !')
+        });
 })
 
 app.listen(PORT, () => {
