@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const exphbs = require('express-handlebars')
 const morgan = require('morgan')
 const imdb = require('imdb-api')
 const fs = require('fs')
@@ -23,6 +24,8 @@ app.use(morgan('dev')) // a logger for express
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.engine('hbs', exphbs({extname: 'hbs', defaultLayout: 'main'}));
+app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
     res.send('hello!')
@@ -32,8 +35,12 @@ app.post('/', (req, res) => {
     res.send(req.body.key)
 })
 
-app.get('/search', (req, res) => {
+app.get('/home', (req, res) => {
+    res.render('home', { pageTitle: 'Some page title', content: 'some stuff'})
+})
 
+app.get('/search', (req, res) => {
+    res.send('search')
 })
 
 app.listen(PORT, () => {
