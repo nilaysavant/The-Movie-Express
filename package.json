@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/nilaysavant/The-Movie-Express#readme",
   "devDependencies": {
-    "morgan": "^1.9.1",
     "nodemon": "^1.18.10"
   },
   "dependencies": {
@@ -27,6 +26,7 @@
     "express-handlebars": "^3.0.2",
     "imdb-api": "^4.0.2",
     "knex": "^0.16.3",
+    "morgan": "^1.9.1",
     "node-fetch": "^2.3.0",
     "pg": "^7.8.1"
   }
