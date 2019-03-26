@@ -38,11 +38,11 @@ app.post('/', (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    res.render('home', { pageTitle: 'Some page title', content: 'some stuff' })
+    res.render('home', { pageTitle: 'The Movie Express', content: 'Home' })
 })
 
 app.post('/search', (req, res) => {
-    let searchString = req.body.searchString
+    let searchString = req.body.searchText
     imdb.search({
         name: searchString
     },
