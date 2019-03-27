@@ -10,13 +10,25 @@ const db = knex({ // postgress database login info
     }
 });
 
-// create a table for movies : movie-db
+// Scheema/Structure
+/*
+    MOVIES (table)
+    id  | title | year | type | poster
+    ----|-------|------|------|-------
+
+*/
+
+// create a table for movies
 db.schema.hasTable('movies') // check if already created
     .then((exists) => {
         if (!exists) {
             return db.schema.createTable('movies', (table) => {
-                table.increments('movie_id').unique().primary() // unique primary key ID field for each movie
-                table.text('movie_name') // movie name field
+                table.increments('id').unique().primary() // unique primary key ID field for each movie
+                table.text('title') // movie name field
+                table.string('year', 5) // movie name field
+                table.string('type', 10) // movie name field
+                table.text('poster') // movie name field
+
             })
         }
     })
