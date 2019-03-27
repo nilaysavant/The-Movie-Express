@@ -53,6 +53,11 @@ app.get('/home', (req, res) => {
     res.render('home', { pageTitle: 'The Movie Express', content: 'Home' })
 })
 
+/* 
+  /search : POST
+  Enables searching for a movie and currently auto adds 
+  the first result to db.
+*/
 app.post('/search', (req, res) => {
     let searchString = req.body.searchText
     imdb.search({
