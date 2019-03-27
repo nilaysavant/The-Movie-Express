@@ -1,4 +1,5 @@
 const express = require('express')
+const knex = require('knex')
 const path = require('path')
 const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
@@ -8,6 +9,17 @@ const fs = require('fs')
 
 
 const PORT = 8080 // Server Port Variable
+
+const db = knex({ // postgress database login info
+    client: 'pg',
+    connection: {
+        host: 'localhost',
+        user: 'nilay',
+        password: 'password',
+        database: 'the-movie-express'
+    }
+});
+
 
 const getApiKey = () => {
     const api_file = fs.readFileSync('OMDB_API_KEY.txt')
@@ -50,11 +62,22 @@ app.post('/search', (req, res) => {
             apiKey: OMDB_API_KEY
         })
         .then((searchResults) => {
-            // console.log('RES:', searchResults.results[0])
-            res.send(searchResults.results[0])
+            const { imdbid, title, year, type, poster } = searchResults.results[0]
+            console.log('ID', searchResults.results[0])
+            return db.table('movies').insert({
+                id: imdbid,
+                title,
+                year,
+                type,
+                poster
+            })
+            .then(() => {
+                console.log('movie ID:', imdbid)
+                res.send(searchResults.results[0])
+            })
         })
         .catch(err => {
-            // console.error(err)
+            console.error(err)
             res.send('error !')
         });
 })

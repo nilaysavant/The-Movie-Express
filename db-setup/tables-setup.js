@@ -23,12 +23,11 @@ db.schema.hasTable('movies') // check if already created
     .then((exists) => {
         if (!exists) {
             return db.schema.createTable('movies', (table) => {
-                table.increments('id').unique().primary() // unique primary key ID field for each movie
+                table.string('id', 10).primary() // unique primary key ID field for each movie
                 table.string('title', 60) // movie name field
                 table.string('year', 5) // movie name field
                 table.string('type', 10) // movie name field
                 table.text('poster') // movie name field
-
             })
         }
     })
