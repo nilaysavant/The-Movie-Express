@@ -67,24 +67,37 @@ app.post('/search', (req, res) => {
             apiKey: OMDB_API_KEY
         })
         .then((searchResults) => {
-            const { imdbid, title, year, type, poster } = searchResults.results[0]
-            console.log('ID', searchResults.results[0])
-            return db.table('movies').insert({
-                id: imdbid,
-                title,
-                year,
-                type,
-                poster
-            })
-            .then(() => {
-                console.log('movie ID:', imdbid)
-                res.send(searchResults.results[0])
-            })
+            console.log('movie ID:', searchResults.results[0].imdbid)
+            res.send(searchResults.results[0])
         })
         .catch(err => {
             console.error(err)
             res.send('error !')
         });
+})
+
+/* 
+  /add-movie : POST
+  Adds the movie to the database
+*/
+app.post('/add-movie', (req, res) => {
+    const { imdbid, title, year, type, poster } = req.body
+    console.log('ID', imdbid)
+    return db.table('movies').insert({
+        id: imdbid,
+        title,
+        year,
+        type,
+        poster
+    })
+        .then(() => {
+            console.log('movie ID:', imdbid)
+            res.send('Added Movie!')
+        })
+        .catch(err => {
+            console.error(err)
+            res.send('error !')
+        })
 })
 
 app.listen(PORT, () => {

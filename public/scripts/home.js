@@ -1,18 +1,51 @@
 
-searchbuttonElement = document.getElementById('searchButtton')
-textInputElement = document.getElementById('searchText')
+let searchbuttonElement = document.getElementById('searchButtton')
+let textInputElement = document.getElementById('searchText')
 
+let imdbid = document.getElementById('movieID')
+let title = document.getElementById('movieTitle')
+let year = document.getElementById('movieYear')
+let type = document.getElementById('movieType')
+let poster = document.getElementById('moviePoster')
+
+let addButtonDiv = document.getElementById('addButtonDiv')
+let addButton = document.createElement('button')
+addButton.innerText = 'Add'
+addButton.id = 'addButtonID'
+
+addButton.onclick = addMovieDB
+
+let movieData = {}
 
 function searchMovie() {
     postData(`/search`, { searchText: textInputElement.value })
         .then(data => {
+            movieData = data
             console.log(data)
-            document.getElementById('movieTitle').innerHTML = 'Title: ' + data.title
-            document.getElementById('movieYear').innerHTML = 'Year: ' + data.year
-            document.getElementById('moviePoster').src = data.poster
-
+            imdbid.innerHTML = 'ID: ' + movieData.imdbid
+            title.innerHTML = 'Title: ' + movieData.title
+            year.innerHTML = 'Year: ' + movieData.year
+            type.innerHTML = 'Type: ' + movieData.type
+            poster.src = movieData.poster
+            
+            if (addButtonDiv.hasChildNodes === true) {
+                console.log('true')
+                addButtonDiv.replaceChild(addButton)
+            }
+            else {
+                console.log('else')
+                addButtonDiv.appendChild(addButton)
+            }
         }) // JSON-string from `response.json()` call
-        .catch(error => console.error(error));
+        .catch(error => console.error(error))
+}
+
+function addMovieDB() {
+    postData(`/add-movie`, movieData)
+        .then(data => {
+            console.log(data)
+        }) // JSON-string from `response.json()` call
+        .catch(error => console.error(error))
 }
 
 function postData(url = ``, data = {}) {
