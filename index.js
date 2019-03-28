@@ -49,8 +49,12 @@ app.post('/', (req, res) => {
     res.send(req.body.key)
 })
 
-app.get('/home', (req, res) => {
-    res.render('home', { pageTitle: 'The Movie Express', content: 'Home' })
+/* 
+  /search : GET
+  Movie Search and Add page (render)
+*/
+app.get('/search', (req, res) => {
+    res.render('search', { pageTitle: 'The Movie Express', content: 'Search' })
 })
 
 /* 
