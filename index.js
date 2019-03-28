@@ -20,7 +20,6 @@ const db = knex({ // postgress database login info
     }
 });
 
-
 const getApiKey = () => {
     const api_file = fs.readFileSync('OMDB_API_KEY.txt')
     return api_file.toString()
@@ -47,6 +46,14 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     res.send(req.body.key)
+})
+
+/* 
+  /home : GET
+  Home Page
+*/
+app.get('/home', (req, res) => {
+    res.render('home', { pageTitle: 'The Movie Express', content: 'Home' })
 })
 
 /* 
