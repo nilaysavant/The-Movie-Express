@@ -2,7 +2,6 @@
 let searchbuttonElement = document.getElementById('searchButtton')
 let textInputElement = document.getElementById('searchText')
 
-
 let cards = document.getElementById('cards')
 
 let movieData = []
@@ -16,7 +15,6 @@ function searchMovie() {
             let row, prev_i = 0;
             for (let i = 0; i < movieData.length; i++) {
                 let element = movieData[i]
-
                 // row = document.createElement('div')
                 let column = document.createElement('div')
                 let card = document.createElement('div')
@@ -28,7 +26,6 @@ function searchMovie() {
                 let type = document.createElement('div')
                 let poster = document.createElement('img')
                 let addButton = document.createElement('button')
-
                 // row.className = 'row'
                 column.className = 'column'
                 card.className = 'card'
@@ -51,7 +48,6 @@ function searchMovie() {
                     prev_i = i
                 }
                 row.appendChild(column)
-
                 cards.appendChild(row)
                 row.appendChild(column)
                 column.appendChild(card)
@@ -67,8 +63,6 @@ function searchMovie() {
                 container.appendChild(document.createElement('br'))
                 container.appendChild(document.createElement('br'))
             }
-
-
         }) // JSON-string from `response.json()` call
         .catch(error => console.error(error))
 }
