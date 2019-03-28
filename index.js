@@ -53,7 +53,15 @@ app.post('/', (req, res) => {
   Home Page
 */
 app.get('/home', (req, res) => {
-    res.render('home', { pageTitle: 'The Movie Express', content: 'Home' })
+    db('movies').select('*')
+        .then((movie) => {
+            res.render('home', {
+                pageTitle: 'The Movie Express',
+                content: 'Home',
+                layout: 'home-layout',
+                array: movie
+            })
+        })
 })
 
 /* 
@@ -61,7 +69,7 @@ app.get('/home', (req, res) => {
   Movie Search and Add page (render)
 */
 app.get('/search', (req, res) => {
-    res.render('search', { pageTitle: 'The Movie Express',content: 'Search', layout: 'search-layout' })
+    res.render('search', { pageTitle: 'The Movie Express', content: 'Search', layout: 'search-layout' })
 })
 
 /* 
