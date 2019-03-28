@@ -2,44 +2,58 @@
 let searchbuttonElement = document.getElementById('searchButtton')
 let textInputElement = document.getElementById('searchText')
 
-let imdbid = document.getElementById('movieID')
-let title = document.getElementById('movieTitle')
-let year = document.getElementById('movieYear')
-let type = document.getElementById('movieType')
-let poster = document.getElementById('moviePoster')
 
-let addButtonDiv = document.getElementById('addButtonDiv')
-let addButton = document.createElement('button')
-addButton.innerText = 'Add'
-addButton.id = 'addButtonID'
+let cards = document.getElementById('cards')
 
-addButton.onclick = addMovieDB
-
-let movieData = {}
+let movieData = []
 
 function searchMovie() {
     postData(`/search`, { searchText: textInputElement.value })
         .then(data => {
             movieData = data
             console.log(data)
-            imdbid.innerHTML = 'ID: ' + movieData.imdbid
-            title.innerHTML = 'Title: ' + movieData.title
-            year.innerHTML = 'Year: ' + movieData.year
-            type.innerHTML = 'Type: ' + movieData.type
-            poster.src = movieData.poster
+            cards.innerHTML = ''
+            movieData.forEach(element => {
+                let row = document.createElement('div')
+                let column = document.createElement('div')
+                let card = document.createElement('div')
 
-            if (addButtonDiv.hasChildNodes === true) {
-                addButtonDiv.replaceChild(addButton)
-            }
-            else {
-                addButtonDiv.appendChild(addButton)
-            }
+                let imdbid = document.createElement('div')
+                let title = document.createElement('div')
+                let year = document.createElement('div')
+                let type = document.createElement('div')
+                let poster = document.createElement('img')
+                let addButton = document.createElement('button')
+
+                imdbid.innerHTML = element.imdbid
+                title.innerHTML = element.title
+                year.innerHTML = element.year
+                type.innerHTML = element.type
+                poster.src = element.poster
+                addButton.innerText = 'Add'
+                addButton.onclick = function () { addMovieDB(element) }
+
+                cards.appendChild(row)
+                row.appendChild(column)
+                card.appendChild(poster)
+                card.appendChild(document.createElement('br'))
+                column.appendChild(card)
+                card.appendChild(imdbid)
+                card.appendChild(title)
+                card.appendChild(year)
+                card.appendChild(type)
+                card.appendChild(addButton)
+                card.appendChild(document.createElement('br'))
+                card.appendChild(document.createElement('br'))
+                card.appendChild(document.createElement('br'))
+            });
+
         }) // JSON-string from `response.json()` call
         .catch(error => console.error(error))
 }
 
-function addMovieDB() {
-    postData(`/add-movie`, movieData)
+function addMovieDB(movie) {
+    postData(`/add-movie`, movie)
         .then(data => {
             console.log(data)
             if (data === 'success') {

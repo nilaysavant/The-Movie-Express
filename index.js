@@ -61,7 +61,7 @@ app.get('/home', (req, res) => {
   Movie Search and Add page (render)
 */
 app.get('/search', (req, res) => {
-    res.render('search', { pageTitle: 'The Movie Express', content: 'Search' })
+    res.render('search', { pageTitle: 'The Movie Express',content: 'Search', layout: 'search-layout' })
 })
 
 /* 
@@ -79,7 +79,7 @@ app.post('/search', (req, res) => {
         })
         .then((searchResults) => {
             console.log('movie ID:', searchResults.results[0].imdbid)
-            res.json(searchResults.results[0])
+            res.json(searchResults.results)
         })
         .catch(err => {
             console.error(err)
