@@ -13,8 +13,11 @@ function searchMovie() {
             movieData = data
             console.log(data)
             cards.innerHTML = ''
-            movieData.forEach(element => {
-                let row = document.createElement('div')
+            let row, prev_i = 0;
+            for (let i = 0; i < movieData.length; i++) {
+                let element = movieData[i]
+
+                // row = document.createElement('div')
                 let column = document.createElement('div')
                 let card = document.createElement('div')
                 let container = document.createElement('div')
@@ -26,7 +29,7 @@ function searchMovie() {
                 let poster = document.createElement('img')
                 let addButton = document.createElement('button')
 
-                row.className = 'row'
+                // row.className = 'row'
                 column.className = 'column'
                 card.className = 'card'
                 container.className = 'container'
@@ -40,8 +43,17 @@ function searchMovie() {
                 addButton.innerText = 'Add'
                 addButton.onclick = function () { addMovieDB(element) }
 
-                cards.appendChild(column)
-                // row.appendChild(column)
+                if (i - prev_i === 4 || i === 0) {
+                    row = document.createElement('div')
+                    row.className = 'row'
+                    cards.appendChild(row)
+
+                    prev_i = i
+                }
+                row.appendChild(column)
+
+                cards.appendChild(row)
+                row.appendChild(column)
                 column.appendChild(card)
                 card.appendChild(poster)
                 card.appendChild(container)
@@ -54,7 +66,8 @@ function searchMovie() {
                 container.appendChild(document.createElement('br'))
                 container.appendChild(document.createElement('br'))
                 container.appendChild(document.createElement('br'))
-            });
+            }
+
 
         }) // JSON-string from `response.json()` call
         .catch(error => console.error(error))
