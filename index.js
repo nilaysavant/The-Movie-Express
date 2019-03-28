@@ -72,7 +72,7 @@ app.post('/search', (req, res) => {
         })
         .catch(err => {
             console.error(err)
-            res.json('error !')
+            res.status(400).json('failure')
         });
 })
 
@@ -92,11 +92,11 @@ app.post('/add-movie', (req, res) => {
     })
         .then(() => {
             console.log('movie ID:', imdbid)
-            res.json('Added Movie!')
+            res.json('success')
         })
         .catch(err => {
             console.error(err)
-            res.json('error !')
+            res.status(400).json('failure')
         })
 })
 

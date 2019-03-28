@@ -27,13 +27,11 @@ function searchMovie() {
             year.innerHTML = 'Year: ' + movieData.year
             type.innerHTML = 'Type: ' + movieData.type
             poster.src = movieData.poster
-            
+
             if (addButtonDiv.hasChildNodes === true) {
-                console.log('true')
                 addButtonDiv.replaceChild(addButton)
             }
             else {
-                console.log('else')
                 addButtonDiv.appendChild(addButton)
             }
         }) // JSON-string from `response.json()` call
@@ -44,6 +42,12 @@ function addMovieDB() {
     postData(`/add-movie`, movieData)
         .then(data => {
             console.log(data)
+            if (data === 'success') {
+                alert('Movie Added Succesfully!')
+            }
+            else {
+                alert('Movie already present in database!')
+            }
         }) // JSON-string from `response.json()` call
         .catch(error => console.error(error))
 }
