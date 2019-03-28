@@ -17,6 +17,7 @@ function searchMovie() {
                 let row = document.createElement('div')
                 let column = document.createElement('div')
                 let card = document.createElement('div')
+                let container = document.createElement('div')
 
                 let imdbid = document.createElement('div')
                 let title = document.createElement('div')
@@ -25,27 +26,34 @@ function searchMovie() {
                 let poster = document.createElement('img')
                 let addButton = document.createElement('button')
 
+                row.className = 'row'
+                column.className = 'column'
+                card.className = 'card'
+                container.className = 'container'
+
                 imdbid.innerHTML = element.imdbid
                 title.innerHTML = element.title
                 year.innerHTML = element.year
                 type.innerHTML = element.type
                 poster.src = element.poster
+                poster.style = 'width:100%'
                 addButton.innerText = 'Add'
                 addButton.onclick = function () { addMovieDB(element) }
 
-                cards.appendChild(row)
-                row.appendChild(column)
-                card.appendChild(poster)
-                card.appendChild(document.createElement('br'))
+                cards.appendChild(column)
+                // row.appendChild(column)
                 column.appendChild(card)
-                card.appendChild(imdbid)
-                card.appendChild(title)
-                card.appendChild(year)
-                card.appendChild(type)
-                card.appendChild(addButton)
-                card.appendChild(document.createElement('br'))
-                card.appendChild(document.createElement('br'))
-                card.appendChild(document.createElement('br'))
+                card.appendChild(poster)
+                card.appendChild(container)
+                container.appendChild(document.createElement('br'))
+                container.appendChild(imdbid)
+                container.appendChild(title)
+                container.appendChild(year)
+                container.appendChild(type)
+                container.appendChild(addButton)
+                container.appendChild(document.createElement('br'))
+                container.appendChild(document.createElement('br'))
+                container.appendChild(document.createElement('br'))
             });
 
         }) // JSON-string from `response.json()` call
