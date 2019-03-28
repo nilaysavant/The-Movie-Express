@@ -68,11 +68,11 @@ app.post('/search', (req, res) => {
         })
         .then((searchResults) => {
             console.log('movie ID:', searchResults.results[0].imdbid)
-            res.send(searchResults.results[0])
+            res.json(searchResults.results[0])
         })
         .catch(err => {
             console.error(err)
-            res.send('error !')
+            res.json('error !')
         });
 })
 
@@ -92,11 +92,11 @@ app.post('/add-movie', (req, res) => {
     })
         .then(() => {
             console.log('movie ID:', imdbid)
-            res.send('Added Movie!')
+            res.json('Added Movie!')
         })
         .catch(err => {
             console.error(err)
-            res.send('error !')
+            res.json('error !')
         })
 })
 
