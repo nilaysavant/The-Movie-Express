@@ -18,7 +18,7 @@ const db = knex({ // postgress database login info
         password: 'password',
         database: 'the-movie-express'
     }
-});
+})
 
 const getApiKey = () => {
     const api_file = fs.readFileSync('OMDB_API_KEY.txt')
@@ -35,10 +35,18 @@ app.use(morgan('dev')) // a logger for express
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'main' }));
-app.set('view engine', 'hbs');
+app.engine('hbs', exphbs({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    helpers: {
+        escape: function (variable) {
+            return variable.replace(/(['"])/g, '\\$1')
+        }
+    }
+}))
+app.set('view engine', 'hbs')
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
     res.redirect('/home')
@@ -126,7 +134,7 @@ app.post('/add-movie', (req, res) => {
 app.post('/delete-movie', (req, res) => {
     const imdbid = req.body.imdbid
     console.log('ID:', imdbid)
-    db.table('movies').where({id: imdbid}).del()
+    db.table('movies').where({ id: imdbid }).del()
         .then(() => {
             console.log('movie ID:', imdbid)
             res.json('success')

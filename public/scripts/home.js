@@ -1,6 +1,12 @@
 
-function archiveMovie(movieID) {
-
+function archiveMovie(movieID, movieTitle) {
+    let verify_delete = confirm('Are you sure you want to archive ' + movieTitle + ' ?')
+    if (verify_delete) {
+        console.log('deleting movie with ID:', movieID)
+        postData('/delete-movie', { imdbid: movieID })
+        alert('movie '+ movieID + ' deleted !')
+        location.reload(true)
+    }
 }
 
 function postData(url = ``, data = {}) {
