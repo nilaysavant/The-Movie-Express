@@ -2,7 +2,7 @@
 let searchbuttonElement = document.getElementById('searchButtton')
 let textInputElement = document.getElementById('searchText')
 
-let cards = document.getElementById('cards')
+let cards = document.getElementById('cards-id')
 
 let movieData = []
 
@@ -17,7 +17,7 @@ function searchMovie() {
                 let element = movieData[i]
                 // row = document.createElement('div')
                 let column = document.createElement('div')
-                let card = document.createElement('div')
+                let card = document.createElement('article')
                 let container = document.createElement('div')
 
                 let imdbid = document.createElement('div')
@@ -27,9 +27,13 @@ function searchMovie() {
                 let poster = document.createElement('img')
                 let addButton = document.createElement('button')
                 // row.className = 'row'
+                title.className = 'card-heading'
                 column.className = 'column'
                 card.className = 'card'
                 container.className = 'container'
+                imdbid.className = 'card-info'
+                year.className = 'card-info'
+                type.className = 'card-info'
 
                 imdbid.innerHTML = element.imdbid
                 title.innerHTML = element.title
@@ -38,19 +42,21 @@ function searchMovie() {
                 poster.src = element.poster
                 poster.style = 'width:100%'
                 addButton.innerText = 'Add'
+                addButton.className = 'button'
                 addButton.onclick = function () { addMovieDB(element) }
 
-                if (i - prev_i === 4 || i === 0) {
-                    row = document.createElement('div')
-                    row.className = 'row'
-                    cards.appendChild(row)
+                // if (i - prev_i === 4 || i === 0) {
+                //     row = document.createElement('div')
+                //     row.className = 'row'
+                //     cards.appendChild(row)
 
-                    prev_i = i
-                }
-                row.appendChild(column)
-                cards.appendChild(row)
-                row.appendChild(column)
-                column.appendChild(card)
+                //     prev_i = i
+                // }
+                // row.appendChild(column)
+                // cards.appendChild(row)
+                // row.appendChild(column)
+                // column.appendChild(card)
+                cards.appendChild(card)
                 card.appendChild(poster)
                 card.appendChild(container)
                 container.appendChild(document.createElement('br'))

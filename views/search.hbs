@@ -2,10 +2,14 @@
 <h2>{{ content }}</h2>
 
 <form action="">
-    Search for your movie: <input type="text" name="" id="searchText">
-    <input type="button" value="Search" id="searchButtton" onclick="searchMovie()">
+    <center>
+        <input type="text" name="" id="searchText" class="input-class">
+        <br>
+        <br>
+        <input type="button" class="button-search" value="Search" id="searchButtton" onclick="searchMovie()">
+    </center>
 </form>
 <hr>
-<div id="cards"></div>
+<section class="cards" id="cards-id"></section>
 
 <script src="scripts/search.js"></script>
