@@ -7,6 +7,7 @@ body {
 .page-title {
     color: #f1f1f1;
 }
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -54,15 +55,47 @@ a {
     text-align: center;
 }
 
-.search-bar {
-    font-size: 1em;
+
+.search-cards-list {
+    padding: 0.1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: #f1f1f1;
+}
+
+.search-card {
+    flex: 0 1 calc(50% - 1em);
+    padding: 0.4em;
+    text-align: center;
+    background-color: #f1f1f1;
+    margin-top: 0.9em;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
 }
 
 .input-class {
     font-size: 1em;
+    display: block;
+    text-align: center;
+    padding: 0.7em 12em;
+    text-decoration: none;
 }
 
-/* Style the counter cards */
+.button-search {
+    background-color: #4CAF50;
+    /* Green */
+
+    border: none;
+    color: white;
+    padding: 0.1em 8.2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2em;
+}
+
+/* CSS Movie cards begins--------------------- */
 .card {
     flex: 0 1 calc(18% - 1em);
     /* this adds the "card" effect */
@@ -85,6 +118,13 @@ a {
     font-size: 1em;
 }
 
+.cards {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .button {
     background-color: #4CAF50;
     /* Green */
@@ -97,25 +137,10 @@ a {
     font-size: 1.2em;
 }
 
-.button-search {
-    background-color: #4CAF50;
-    /* Green */
-    border: none;
-    color: white;
-    padding: 0.1em 2.8em;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 2em;
-}
+/* CSS Movie Cards end here ------------------------*/
 
-.cards {
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 
+/* screen stuff starts here ---------------------------------*/
 @media screen and (min-height: 100em) {
     body {
         font-family: Arial, Helvetica, sans-serif;
