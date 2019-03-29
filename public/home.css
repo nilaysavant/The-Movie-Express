@@ -2,26 +2,96 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+a {
+    font-size: 1em;
+    text-align: center;
+}
+
 /* Style the counter cards */
 .card {
     flex: 0 1 calc(18% - 1em);
     /* this adds the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+    padding-top: 0.9em;
+    padding-bottom: 0em;
     text-align: center;
     background-color: #f1f1f1;
     margin: 0.2em;
 }
 
+.card-info {
+    font-size: 1em;
+}
+
+.card-heading {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 0.1em 2.8em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2em;
+}
+
 .cards {
-  padding: 10px;
+    padding: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
 @media screen and (min-height: 100em) {
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
     .card {
         flex: 0 1 calc(47% - 1em);
     }
+
+    .card-info {
+        font-size: 1.8em;
+    }
+
+    .card-heading {
+        font-size: 2em;
+    }
+
+    h1 {
+        font-size: 4.5em;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 4em;
+        text-align: center;
+    }
+
+    a {
+        font-size: 3em;
+        text-align: center;
+    }
+    .button {
+      padding: 0.2em 3.8em;
+      font-size: 1.4em;
+  }
 }

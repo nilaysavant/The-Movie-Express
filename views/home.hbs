@@ -1,8 +1,8 @@
 <h1>The Movie Express </h1>
+<hr>
 <h2>{{ content }}</h2>
-
 <a href="/search">Submit Movie</a>
-<br>
+<hr>
 <br>
 
 <div class="centered">
@@ -10,17 +10,17 @@
         {{#each array as |movie|}}
         <article class="card">
             <img src={{movie.poster}} style="width: 100%;">
-                <div>
-                    <h3>{{movie.title}}</h3>
-                </div>
-                <div><i>ID: {{movie.id}}</i></div>
-                <div>
-                    {{movie.year}}
+            <div class="card-heading">
+                {{movie.title}}
+            </div>
+            <div class="card-info">
+                <p>
+                    <i>ID: {{movie.id}}</i>
                     <br>
-                    {{movie.type}}
-                    <br>
-                    <button>Add</button><br><br><br>
-                </div>
+                    {{movie.year}} {{movie.type}}
+                </p>
+                <button class="button">Add</button><br><br><br>
+            </div>
         </article>
         {{/each}}
     </section>
