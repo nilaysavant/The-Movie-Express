@@ -90,8 +90,9 @@ a {
         font-size: 3em;
         text-align: center;
     }
+
     .button {
-      padding: 0.2em 3.8em;
-      font-size: 1.3em;
-  }
+        padding: 0.2em 3.8em;
+        font-size: 1.3em;
+    }
 }
