@@ -2,14 +2,14 @@
 <h2>{{ content }}</h2>
 
 <a href="/search">Submit Movie</a>
+<br>
+<br>
 
-<div id="cards">
-    {{#each array as |movie|}}
-    {{!-- <div class="row"> --}}
-    <div class="column">
-        <div class="card">
+<div class="centered">
+    <section class="cards">
+        {{#each array as |movie|}}
+        <article class="card">
             <img src={{movie.poster}} style="width: 100%;">
-            <div class="container"><br>
                 <div>
                     <h3>{{movie.title}}</h3>
                 </div>
@@ -21,11 +21,9 @@
                     <br>
                     <button>Add</button><br><br><br>
                 </div>
-            </div>
-        </div>
-    </div>
-    {{!-- </div> --}}
-    {{/each}}
+        </article>
+        {{/each}}
+    </section>
 </div>
 
 
