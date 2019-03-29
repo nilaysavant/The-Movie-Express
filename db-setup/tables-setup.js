@@ -13,8 +13,8 @@ const db = knex({ // postgress database login info
 // Scheema/Structure
 /*
     MOVIES (table)
-    id  | title | year | type | poster
-    ----|-------|------|------|-------
+    id  |  created  |  updated  | title | year | type | poster
+    ----|-----------|-----------|-------|------|------|-------
 
 */
 
@@ -24,10 +24,12 @@ db.schema.hasTable('movies') // check if already created
         if (!exists) {
             return db.schema.createTable('movies', (table) => {
                 table.string('id', 10).primary() // unique primary key ID field for each movie
-                table.string('title', 60) // movie name field
-                table.string('year', 5) // movie name field
-                table.string('type', 10) // movie name field
-                table.text('poster') // movie name field
+                table.timestamp('created', { useTz: true }); // add created_at (timestamp) field
+                table.timestamp('updated', { useTz: true }); // add updated_at (timestamp) field
+                table.string('title', 60) // movie tile field
+                table.string('year', 5) // movie year field
+                table.string('type', 10) // movie type field
+                table.text('poster') // movie poster url field
             })
         }
     })
