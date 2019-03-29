@@ -9,66 +9,61 @@ let movieData = []
 function searchMovie() {
     postData(`/search`, { searchText: textInputElement.value })
         .then(data => {
-            movieData = data
-            console.log(data)
-            cards.innerHTML = ''
-            let row, prev_i = 0;
-            for (let i = 0; i < movieData.length; i++) {
-                let element = movieData[i]
-                // row = document.createElement('div')
-                let column = document.createElement('div')
-                let card = document.createElement('article')
-                let container = document.createElement('div')
+            if (data !== 'failure') {
+                movieData = data
+                console.log(data)
+                cards.innerHTML = ''
+                let row, prev_i = 0;
+                for (let i = 0; i < movieData.length; i++) {
+                    let element = movieData[i]
+                    // row = document.createElement('div')
+                    let column = document.createElement('div')
+                    let card = document.createElement('article')
+                    let container = document.createElement('div')
 
-                let imdbid = document.createElement('div')
-                let title = document.createElement('div')
-                let year = document.createElement('div')
-                let type = document.createElement('div')
-                let poster = document.createElement('img')
-                let addButton = document.createElement('button')
-                // row.className = 'row'
-                title.className = 'card-heading'
-                column.className = 'column'
-                card.className = 'card'
-                container.className = 'container'
-                imdbid.className = 'card-info'
-                year.className = 'card-info'
-                type.className = 'card-info'
+                    let imdbid = document.createElement('div')
+                    let title = document.createElement('div')
+                    let year = document.createElement('div')
+                    let type = document.createElement('div')
+                    let poster = document.createElement('img')
+                    let addButton = document.createElement('button')
+                    // row.className = 'row'
+                    title.className = 'card-heading'
+                    column.className = 'column'
+                    card.className = 'card'
+                    container.className = 'container'
+                    imdbid.className = 'card-info'
+                    year.className = 'card-info'
+                    type.className = 'card-info'
 
-                imdbid.innerHTML = element.imdbid
-                title.innerHTML = element.title
-                year.innerHTML = element.year
-                type.innerHTML = element.type
-                poster.src = element.poster
-                poster.style = 'width:100%'
-                addButton.innerText = 'Add'
-                addButton.className = 'button'
-                addButton.onclick = function () { addMovieDB(element) }
+                    imdbid.innerHTML = element.imdbid
+                    title.innerHTML = element.title
+                    year.innerHTML = element.year
+                    type.innerHTML = element.type
+                    poster.src = element.poster
+                    poster.style = 'width:100%'
+                    addButton.innerText = 'Add'
+                    addButton.className = 'button'
+                    addButton.onclick = function () { addMovieDB(element) }
 
-                // if (i - prev_i === 4 || i === 0) {
-                //     row = document.createElement('div')
-                //     row.className = 'row'
-                //     cards.appendChild(row)
-
-                //     prev_i = i
-                // }
-                // row.appendChild(column)
-                // cards.appendChild(row)
-                // row.appendChild(column)
-                // column.appendChild(card)
-                cards.appendChild(card)
-                card.appendChild(poster)
-                card.appendChild(container)
-                container.appendChild(document.createElement('br'))
-                container.appendChild(imdbid)
-                container.appendChild(title)
-                container.appendChild(year)
-                container.appendChild(type)
-                container.appendChild(addButton)
-                container.appendChild(document.createElement('br'))
-                container.appendChild(document.createElement('br'))
-                container.appendChild(document.createElement('br'))
+                    cards.appendChild(card)
+                    card.appendChild(poster)
+                    card.appendChild(container)
+                    container.appendChild(document.createElement('br'))
+                    container.appendChild(imdbid)
+                    container.appendChild(title)
+                    container.appendChild(year)
+                    container.appendChild(type)
+                    container.appendChild(addButton)
+                    container.appendChild(document.createElement('br'))
+                    container.appendChild(document.createElement('br'))
+                    container.appendChild(document.createElement('br'))
+                }
             }
+            else {
+                alert('Movie not found !')
+            }
+
         }) // JSON-string from `response.json()` call
         .catch(error => console.error(error))
 }

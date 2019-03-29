@@ -4,7 +4,7 @@ function archiveMovie(movieID, movieTitle) {
     if (verify_delete) {
         console.log('deleting movie with ID:', movieID)
         postData('/delete-movie', { imdbid: movieID })
-        alert('movie '+ movieID + ' deleted !')
+        alert('movie '+ movieTitle + ' deleted !')
         location.reload(true)
     }
 }
