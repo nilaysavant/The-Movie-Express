@@ -119,6 +119,24 @@ app.post('/add-movie', (req, res) => {
         })
 })
 
+/* 
+  /delete-movie : POST
+  Removes the movie from the database
+*/
+app.post('/delete-movie', (req, res) => {
+    const imdbid = req.body.imdbid
+    console.log('ID:', imdbid)
+    db.table('movies').where({id: imdbid}).del()
+        .then(() => {
+            console.log('movie ID:', imdbid)
+            res.json('success')
+        })
+        .catch(err => {
+            console.error(err)
+            res.status(400).json('failure')
+        })
+})
+
 app.listen(PORT, () => {
     console.log('Serving on port:', PORT)
 })
