@@ -61,7 +61,7 @@ app.post('/', (req, res) => {
   Home Page
 */
 app.get('/home', (req, res) => {
-    db('movies').select('*')
+    db('movies').select('*').orderBy('updated', 'desc')
         .then((movie) => {
             res.render('home', {
                 pageTitle: 'The Movie Express',
@@ -110,8 +110,11 @@ app.post('/search', (req, res) => {
 app.post('/add-movie', (req, res) => {
     const { imdbid, title, year, type, poster } = req.body
     console.log('ID', imdbid)
+    let date = new Date()
     return db.table('movies').insert({
         id: imdbid,
+        created: date,
+        updated: date,
         title,
         year,
         type,
