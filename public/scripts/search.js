@@ -2,12 +2,31 @@
 let searchbuttonElement = document.getElementById('searchButtton')
 let textInputElement = document.getElementById('searchText')
 
+// search on enter press in search input
+textInputElement.addEventListener("keyup", function (event) {
+    if (event.keyCode == 13 || event.which == 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        searchbuttonElement.click()
+    }
+})
+
 let cards = document.getElementById('cards-id')
 
 let movieData = []
 
-function searchMovie() {
-    postData(`/search`, { searchText: textInputElement.value })
+searchbuttonElement.onclick = function () {
+    let movie = textInputElement.value
+    if (movie !== 'undefined' && movie !== '') {
+        searchMovie(textInputElement.value)
+    }
+    else {
+        console.error('enter a valid movie name!');
+    }
+}
+
+function searchMovie(movieName) {
+    postData(`/search`, { searchText: movieName })
         .then(data => {
             if (data !== 'failure') {
                 movieData = data
