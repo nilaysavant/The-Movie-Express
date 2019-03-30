@@ -115,6 +115,3 @@ Movies Table:
    ```http
    localhost:8080
    ```
-
-   
-
