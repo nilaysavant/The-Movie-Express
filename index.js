@@ -159,17 +159,17 @@ app.get('/home', (req, res) => {
 })
 
 /* 
-  /search : GET
-  Movie Search and Add page (render)
+  /submit : GET
+  Movie Submit by search and add page
 */
 app.get('/submit', (req, res) => {
     res.render('submit', { pageTitle: 'The Movie Express', content: 'Submit', layout: 'submit-layout' })
 })
 
 /* 
-  /search : POST
-  Enables searching for a movie and currently auto adds 
-  the first result to db.
+  /submit : POST
+  Enables searching for a movie and adding
+  the desired movie to db.
 */
 app.post('/submit', (req, res) => {
     let searchString = req.body.searchText
