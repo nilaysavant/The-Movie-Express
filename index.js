@@ -162,8 +162,8 @@ app.get('/home', (req, res) => {
   /search : GET
   Movie Search and Add page (render)
 */
-app.get('/search', (req, res) => {
-    res.render('search', { pageTitle: 'The Movie Express', content: 'Search', layout: 'search-layout' })
+app.get('/submit', (req, res) => {
+    res.render('submit', { pageTitle: 'The Movie Express', content: 'Submit', layout: 'submit-layout' })
 })
 
 /* 
@@ -171,7 +171,7 @@ app.get('/search', (req, res) => {
   Enables searching for a movie and currently auto adds 
   the first result to db.
 */
-app.post('/search', (req, res) => {
+app.post('/submit', (req, res) => {
     let searchString = req.body.searchText
     imdb.search({
         name: searchString

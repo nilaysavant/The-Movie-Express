@@ -26,7 +26,7 @@ searchbuttonElement.onclick = function () {
 }
 
 function searchMovie(movieName) {
-    postData(`/search`, { searchText: movieName })
+    postData('/submit', { searchText: movieName })
         .then(data => {
             if (data !== 'failure') {
                 movieData = data
