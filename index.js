@@ -27,6 +27,22 @@ const getApiKey = () => {
 const OMDB_API_KEY = getApiKey() // get api key from file
 console.log('OMDB API KEY:', OMDB_API_KEY)
 
+// CUSTOM FUNCTIONS Start ----------------------------------------
+
+/*
+    returns a list of chunks of an passed array,
+    depending on the chunk size specified
+*/
+const chunkArray = (array, chunk_size) => {
+    let i, j, array_chunks = [], chunk = chunk_size
+    for (i = 0, j = array.length; i < j; i += chunk) {
+        array_chunks.push(array.slice(i, i + chunk))
+    }
+    return array_chunks
+}
+
+// CUSTOM FUNCTIONS End -------------------------------------------
+
 const app = express() // init express app
 
 app.use(morgan('dev')) // a logger for express
@@ -61,13 +77,17 @@ app.post('/', (req, res) => {
   Home Page
 */
 app.get('/home', (req, res) => {
+    let page = req.query.page
+    page = (typeof page === 'undefined' || page == 0) ? 1 : page
     db('movies').select('*').orderBy('updated', 'desc')
-        .then((movie) => {
+        .then((movies) => {
+            movies_chunks = chunkArray(movies, 10)
             res.render('home', {
                 pageTitle: 'The Movie Express',
                 content: 'Home',
                 layout: 'home-layout',
-                array: movie
+                array: movies_chunks[page - 1],
+                pages: movies_chunks.length
             })
         })
 })
