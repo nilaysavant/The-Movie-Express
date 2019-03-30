@@ -78,29 +78,84 @@ app.post('/', (req, res) => {
 */
 app.get('/home', (req, res) => {
     let page = parseInt(req.query.page)
+    let sort = req.query.sort
+    sort = (sort == '' || typeof sort === 'undefined') ? 'date' : sort
     page = (isNaN(page) || page === 0) ? 1 : page
-    db('movies').select('*').orderBy('updated', 'desc')
-        .then((movies) => {
-            movies_chunks = chunkArray(movies, 10)
-            const pageExists = (page) => {
-                return (page <= movies_chunks.length && page > 0)
-            }
-            if (pageExists(page)) {
-                res.render('home', {
-                    pageTitle: 'The Movie Express',
-                    content: 'Home',
-                    layout: 'home-layout',
-                    array: movies_chunks[page - 1],
-                    currentPage: page,
-                    previousPage: (pageExists(page - 1)) ? page - 1 : false,
-                    nextPage: (pageExists(page + 1)) ? page + 1 : false,
-                })
-            }
-            else {
-                res.status(404).send('Error page not found')
-            }
 
-        })
+    if (sort === 'name') {
+        db('movies').select('*').orderBy('title', 'asc')
+            .then((movies) => {
+                movies_chunks = chunkArray(movies, 10)
+                const pageExists = (page) => {
+                    return (page <= movies_chunks.length && page > 0)
+                }
+                if (pageExists(page)) {
+                    res.render('home', {
+                        pageTitle: 'The Movie Express',
+                        content: 'Home',
+                        layout: 'home-layout',
+                        array: movies_chunks[page - 1],
+                        currentPage: page,
+                        previousPage: (pageExists(page - 1)) ? page - 1 : false,
+                        nextPage: (pageExists(page + 1)) ? page + 1 : false,
+                        sort
+                    })
+                }
+                else {
+                    res.status(404).send('Error page not found')
+                }
+            })
+    }
+    else if (sort === 'date') {
+        db('movies').select('*').orderBy('updated', 'desc')
+            .then((movies) => {
+                movies_chunks = chunkArray(movies, 10)
+                const pageExists = (page) => {
+                    return (page <= movies_chunks.length && page > 0)
+                }
+                if (pageExists(page)) {
+                    res.render('home', {
+                        pageTitle: 'The Movie Express',
+                        content: 'Home',
+                        layout: 'home-layout',
+                        array: movies_chunks[page - 1],
+                        currentPage: page,
+                        previousPage: (pageExists(page - 1)) ? page - 1 : false,
+                        nextPage: (pageExists(page + 1)) ? page + 1 : false,
+                        sort
+                    })
+                }
+                else {
+                    res.status(404).send('Error page not found')
+                }
+            })
+    }
+    else if (sort === 'year') {
+        db('movies').select('*').orderBy('year', 'desc')
+            .then((movies) => {
+                movies_chunks = chunkArray(movies, 10)
+                const pageExists = (page) => {
+                    return (page <= movies_chunks.length && page > 0)
+                }
+                if (pageExists(page)) {
+                    res.render('home', {
+                        pageTitle: 'The Movie Express',
+                        content: 'Home',
+                        layout: 'home-layout',
+                        array: movies_chunks[page - 1],
+                        currentPage: page,
+                        previousPage: (pageExists(page - 1)) ? page - 1 : false,
+                        nextPage: (pageExists(page + 1)) ? page + 1 : false,
+                        sort
+                    })
+                }
+                else {
+                    res.status(404).send('Error page not found')
+                }
+
+            })
+    }
+
 })
 
 /* 

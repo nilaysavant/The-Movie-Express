@@ -14,6 +14,15 @@
         <li><a class="active" href="/home">Home</a></li>
         <li><a href="/search">Submit</a></li>
         <li style="float:right"><a href="#about">About</a></li>
+        <li style="float:right" class="dropdown">
+            Sort by :
+            <a href="javascript:void(0)" class="dropbtn">{{sort}}</a>
+            <div class="dropdown-content">
+                <a href="/home?sort=name&page=1">Name</a>
+                <a href="/home?sort=date&page=1">Date Added</a>
+                <a href="/home?sort=year&page=1">Year</a>
+            </div>
+        </li>
     </ul>
     {{!-- navbar ends --}}
 
@@ -22,11 +31,11 @@
     {{!-- footbar start --}}
     <ul>
         {{#if previousPage}}
-        <li><a href="/home?page={{previousPage}}">Previous</a></li>
+        <li><a href="/home?sort={{sort}}&page={{previousPage}}">Previous</a></li>
         {{/if}}
-        <li><a class="active" href="/home?page={{currentPage}}">{{currentPage}}</a></li>
+        <li><a class="active" href="/home?sort={{sort}}&page={{currentPage}}">{{currentPage}}</a></li>
         {{#if nextPage}}
-        <li><a href="/home?page={{nextPage}}">Next</a></li>
+        <li><a href="/home?sort={{sort}}&page={{nextPage}}">Next</a></li>
         {{/if}}
     </ul>
     {{!-- footbar ends --}}
