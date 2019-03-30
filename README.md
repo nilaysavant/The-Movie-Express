@@ -90,27 +90,29 @@ Movies Table:
 
 ### Setup Instructions ( * WIP *) :
 
-1. Make sure PostgreSQL is installed.
+1. Get the [OMDB API key](http://www.omdbapi.com/) and save it in a text file `OMDB_API_KEY.txt` in the root path of this repository.
 
-2. Setup the table with the desired schema :
+2. Make sure PostgreSQL is installed.
+
+3. Setup the table with the desired schema :
 
    ```bash
    node db-setup/tables-setup.js
    ```
 
-3. Install all dependencies : 
+4. Install all dependencies : 
 
    ```bash
    npm install
    ```
 
-4. Start the server using :
+5. Start the server using :
 
    ```bash
    npm start
    ```
 
-5.  Fire up chrome or any web browser :
+6.  Fire up chrome or any web browser :
 
    ```http
    localhost:8080
