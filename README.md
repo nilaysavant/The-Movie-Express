@@ -27,7 +27,7 @@ Page used to **search** and **add** new movies to the collection. Search uses ex
 
 ### Mobile View
 
-The web-app viewed on **chrome** running on an **android** smartphone/mobile.
+The web-app viewed on an **android** smartphone/mobile.
 
 ![mobile-home-search](.readme-res/mobile-home-search.jpg)
 

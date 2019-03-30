@@ -55,7 +55,7 @@ function searchMovie(movieName) {
                     year.className = 'card-info'
                     type.className = 'card-info'
 
-                    imdbid.innerHTML = element.imdbid
+                    // imdbid.innerHTML = element.imdbid
                     title.innerHTML = element.title
                     year.innerHTML = element.year
                     type.innerHTML = element.type
