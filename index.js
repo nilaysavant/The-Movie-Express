@@ -77,18 +77,29 @@ app.post('/', (req, res) => {
   Home Page
 */
 app.get('/home', (req, res) => {
-    let page = req.query.page
-    page = (typeof page === 'undefined' || page == 0) ? 1 : page
+    let page = parseInt(req.query.page)
+    page = (isNaN(page) || page === 0) ? 1 : page
     db('movies').select('*').orderBy('updated', 'desc')
         .then((movies) => {
             movies_chunks = chunkArray(movies, 10)
-            res.render('home', {
-                pageTitle: 'The Movie Express',
-                content: 'Home',
-                layout: 'home-layout',
-                array: movies_chunks[page - 1],
-                pages: movies_chunks.length
-            })
+            const pageExists = (page) => {
+                return (page <= movies_chunks.length && page > 0)
+            }
+            if (pageExists(page)) {
+                res.render('home', {
+                    pageTitle: 'The Movie Express',
+                    content: 'Home',
+                    layout: 'home-layout',
+                    array: movies_chunks[page - 1],
+                    currentPage: page,
+                    previousPage: (pageExists(page - 1)) ? page - 1 : false,
+                    nextPage: (pageExists(page + 1)) ? page + 1 : false,
+                })
+            }
+            else {
+                res.status(404).send('Error page not found')
+            }
+
         })
 })
 

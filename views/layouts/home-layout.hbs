@@ -19,6 +19,18 @@
 
     {{{body}}}
 
+    {{!-- footbar start --}}
+    <ul>
+        {{#if previousPage}}
+        <li><a href="/home?page={{previousPage}}">Previous</a></li>
+        {{/if}}
+        <li><a class="active" href="/home?page={{currentPage}}">{{currentPage}}</a></li>
+        {{#if nextPage}}
+        <li><a href="/home?page={{nextPage}}">Next</a></li>
+        {{/if}}
+    </ul>
+    {{!-- footbar ends --}}
+
 </body>
 
 </html>
