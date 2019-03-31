@@ -150,16 +150,16 @@ Movies Table:
 
    Make the above changes into files `db-setup/tables-setup.js` and `index.js`
 
-5. Setup the table with the desired schema :
+5. Install all dependencies : 
+
+      ```bash
+   npm install
+      ```
+
+6. Setup the table with the desired schema :
 
    ```bash
    node db-setup/tables-setup.js
-   ```
-
-6. Install all dependencies : 
-
-   ```bash
-   npm install
    ```
 
 7. Start the server using :
