@@ -92,27 +92,83 @@ Movies Table:
 
 1. Get the [OMDB API key](http://www.omdbapi.com/) and save it in a text file `OMDB_API_KEY.txt` in the root path of this repository.
 
-2. Make sure PostgreSQL is installed.
+2. Install PostgreSQL : 
 
-3. Setup the table with the desired schema :
+   ```bash
+   sudo apt-get install postgresql postgresql-contrib
+   ```
+
+3. Setup the Database :
+
+   - Log into PostgreSQL prompt:
+
+     ```bash
+     sudo -u postgres psql
+     ```
+
+     `postgres=#` indicates your are logged in.
+
+   - Make sure to create the USER  with username of your user account and a password:
+
+     ```sql
+     CREATE USER <username> WITH PASSWORD '<password>';
+     ```
+
+     (note: you can use any name for the user, but to be directly able to login into the database via terminal, it is recommended to give the username of your user account as username for the DB. This is from my experience on Ubuntu 16.04 based system.)
+
+   - Now add the `createdb` permission to the user:
+
+     ```sql
+     ALTER USER <username> CREATEDB;
+     ```
+
+   - Quit out of SQL prompt:
+
+     ```sql
+     \q
+     ```
+
+   - Now create **the-movie-express** database under the current user:
+
+     ```bash
+     createdb 'the-movie-express'
+     ```
+
+4. Change the Database login info:
+
+   ```javascript
+   const db = knex({ // postgress database login info
+       client: 'pg',
+       connection: {
+           host: 'localhost',
+           user: '<username>',
+           password: '<password>',
+           database: 'the-movie-express'
+       }
+   });
+   ```
+
+   Make the above changes into files `db-setup/tables-setup.js` and `index.js`
+
+5. Setup the table with the desired schema :
 
    ```bash
    node db-setup/tables-setup.js
    ```
 
-4. Install all dependencies : 
+6. Install all dependencies : 
 
    ```bash
    npm install
    ```
 
-5. Start the server using :
+7. Start the server using :
 
    ```bash
    npm start
    ```
 
-6.  Fire up chrome or any web browser :
+8.  Fire up chrome or any web browser :
 
    ```http
    localhost:8080
