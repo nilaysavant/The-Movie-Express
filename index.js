@@ -89,7 +89,7 @@ app.get('/home', (req, res) => {
                 const pageExists = (page) => {
                     return (page <= movies_chunks.length && page > 0)
                 }
-                if (pageExists(page)) {
+                if (pageExists(page) || page === 1) {
                     res.render('home', {
                         pageTitle: 'The Movie Express',
                         content: 'Home',
@@ -113,7 +113,7 @@ app.get('/home', (req, res) => {
                 const pageExists = (page) => {
                     return (page <= movies_chunks.length && page > 0)
                 }
-                if (pageExists(page)) {
+                if (pageExists(page) || page === 1) {
                     res.render('home', {
                         pageTitle: 'The Movie Express',
                         content: 'Home',
@@ -137,7 +137,7 @@ app.get('/home', (req, res) => {
                 const pageExists = (page) => {
                     return (page <= movies_chunks.length && page > 0)
                 }
-                if (pageExists(page)) {
+                if (pageExists(page) || page === 1) {
                     res.render('home', {
                         pageTitle: 'The Movie Express',
                         content: 'Home',
